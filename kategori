@@ -1,0 +1,40 @@
+<?php 
+
+
+$jumlahDataPerHalaman = 4;
+$jumlahData = count(query("SELECT * FROM data"));
+$jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman * $halamanAktif) - $jumlahDataPerHalaman;
+
+$data = query("SELECT * FROM data  LIMIT  $awalData, $jumlahDataPerHalaman");
+    echo "
+    <div class='container'>
+    <h2>Informasi Alat</h2>
+   
+    <table class='table table-striped mt-3'>
+        <tr>
+        <td>No</td>
+        <td>Sensor 1</td>
+        <td>Sensor 2</td>
+        <td>Lokasi</td>
+        <td>Status</td>
+        </tr>";
+        ?>
+<?php $no=1; ?>
+<?php foreach ($data as $r) :?> 
+    <tr>
+    <td><?= $no;?></td>
+    <td><?= $r["id1"];?></td>
+    <td><?= $r["id2"];?></td>
+    <td><?= $r["id3"];?></td>
+    <td><?= $r["status"];?></td> 
+    </tr>
+    <?php $no++;?>
+    <?php endforeach;?>
+    
+ 
+
+<!DOCTYPE html>
+<html lang="en">
+<a href="data/cetak2.php" target="_blank">cetak</a>
